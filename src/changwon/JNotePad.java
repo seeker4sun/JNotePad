@@ -34,7 +34,7 @@ public class JNotePad extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextPane    _textPane  = new JTextPane();
-	private ActionMap    _actionMap = new ActionMap();
+	private ActionMap    _actionMap;// = new ActionMap();
 	private boolean      _isSaved   = true;
 	private JFileChooser _fc        = new JFileChooser(".");
 	private File         _file      = null;
@@ -83,7 +83,6 @@ public class JNotePad extends JFrame {
 	}
 	
 	public JMenuBar createMenuBar() {
-		JMenuBar menubar = new JMenuBar();
 		// File
 		JMenu miFile = new JMenu("File");
 		miFile.setMnemonic(KeyEvent.VK_F);
@@ -107,6 +106,7 @@ public class JNotePad extends JFrame {
 		miHelp.add(new JMenuItem(_actionMap.get("help")));
 		miHelp.add(new JMenuItem(_actionMap.get("about")));
 		
+		JMenuBar menubar = new JMenuBar();
 		menubar.add(miFile);
 		menubar.add(miEdit);
 		menubar.add(miHelp);
@@ -202,19 +202,19 @@ public class JNotePad extends JFrame {
 	}
 
 	private boolean saveAs() {
-		if(_fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			File file = _fc.getSelectedFile();
-			try {
-				open(file);
-				_file = file;
-				setTitle(file.getName() + " - JNotePad");
-				return true;
-			} catch(IOException e) {
-				showSaveErrorMessage();
-				return false;
-			}
+		if(_fc.showOpenDialog(this) != JFileChooser.APPROVE_OPTION)
+			return false;
+		
+		File file = _fc.getSelectedFile();
+		try {
+			open(file);
+			_file = file;
+			setTitle(file.getName() + " - JNotePad");
+			return true;
+		} catch(IOException e) {
+			showSaveErrorMessage();
+			return false;
 		}
-		return false;
 	}
 	
 	private void save(File file) throws IOException {
@@ -420,8 +420,8 @@ public class JNotePad extends JFrame {
 		setVisible(true);
 	}
 	
-
 	public static void main(String[] args) {
-		new JNotePad().start();
+		JNotePad app = new JNotePad();
+		app.start();
 	}
 }
