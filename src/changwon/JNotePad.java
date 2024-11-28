@@ -154,18 +154,18 @@ public class JNotePad extends JFrame {
 	}
 	
 	private boolean open() {
-		if(_fc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			File file = _fc.getSelectedFile();
-			try {
-				open(file);
-				_file = file;
-				setTitle(file.getName() + " - JNotePad");
-				return true;
-			} catch(IOException e) {
-				JOptionPane.showMessageDialog(this, "Could not open file" + file,  "JNotePad", JOptionPane.ERROR_MESSAGE);
-			}
+		if(_fc.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) return false;
+		
+		File file = _fc.getSelectedFile();
+		try {
+			open(file);
+			_file = file;
+			setTitle(file.getName() + " - JNotePad");
+			return true;
+		} catch(IOException e) {
+			JOptionPane.showMessageDialog(this, "Could not open file" + file,  "JNotePad", JOptionPane.ERROR_MESSAGE);
+			return false;
 		}
-		return false;
 	}
 
 	private void open(File file) throws IOException {
