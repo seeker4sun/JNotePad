@@ -231,7 +231,7 @@ public class JNotePad extends JFrame {
 
 		public NewAction() {
 			super();
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctril N"));
+			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl N"));
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_N);
 		}
 		
