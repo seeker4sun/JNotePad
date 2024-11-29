@@ -61,13 +61,13 @@ public class JNotePad extends JFrame {
 
 		_actionMap = createActionMap();
 		
-		JScrollPane scrollPaneOfTextPane = new JScrollPane(_textPane);
 		JMenuBar    menuBar = createMenuBar();
         JToolBar    toolBar = createToolBar();
+        JScrollPane scrollPaneOfTextPane = new JScrollPane(_textPane);
         
 		setJMenuBar(menuBar);
-		add(scrollPaneOfTextPane);
 		add(toolBar, BorderLayout.NORTH);
+		add(scrollPaneOfTextPane);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -236,11 +236,11 @@ public class JNotePad extends JFrame {
 		private static final long serialVersionUID = 1L;
 
 		public NewAction() {
-			super();
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl N"));
+			super("New");
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_N);
+			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl N"));
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(getValue(Action.NAME));
 			if(!confirmSave()) {
@@ -259,10 +259,10 @@ public class JNotePad extends JFrame {
 
 		public OpenAction() {
 			super("Open");
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctril O"));
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_O);
+			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl O"));
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(getValue(Action.NAME));
 			if(!confirmSave()) {
@@ -280,10 +280,10 @@ public class JNotePad extends JFrame {
 
 		public SaveAction() {
 			super("Save");
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctril S"));
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_S);
+			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl S"));
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(getValue(Action.NAME));
 			if(!confirmSave()) {
@@ -303,7 +303,7 @@ public class JNotePad extends JFrame {
 			super("Save As...");
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_A);
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(getValue(Action.NAME));
 			_isSaved = saveAs();
@@ -318,10 +318,10 @@ public class JNotePad extends JFrame {
 
 		public ExitAction() {
 			super("Exit");
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("alt F4"));
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_X);
+			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("alt F4"));
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(getValue(Action.NAME));
 			if(!confirmSave()) {
@@ -339,10 +339,10 @@ public class JNotePad extends JFrame {
 
 		public CutAction() {
 			super("Cut");
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl X"));
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_T);
+			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl X"));
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(getValue(Action.NAME));
 			_textPane.cut();
@@ -357,10 +357,10 @@ public class JNotePad extends JFrame {
 
 		public CopyAction() {
 			super("Copy");
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl C"));
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_C);
+			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl C"));
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(getValue(Action.NAME));
 			_textPane.copy();
@@ -374,11 +374,11 @@ public class JNotePad extends JFrame {
 		private static final long serialVersionUID = 1L;
 
 		public PasteAction() {
-			super("Paste");
+			super("Paste(V)");
+			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_V);
 			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("ctrl V"));
-			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_C);
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println(getValue(Action.NAME));
 			_textPane.paste();
@@ -393,10 +393,10 @@ public class JNotePad extends JFrame {
 
 		public HelpAction() {
 			super("Help");
-			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("F1"));
 			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_H);
+			putValue(Action.ACCELERATOR_KEY, KeyStroke.getKeyStroke("F1"));
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			String[] message = {"Sorry.", "Help contents are not supported yet."};
 			JOptionPane.showMessageDialog(JNotePad.this, message, "JNotePad", JOptionPane.INFORMATION_MESSAGE);
@@ -411,9 +411,9 @@ public class JNotePad extends JFrame {
 
 		public AboutAction() {
 			super("About");
-			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_A);
+			putValue(Action.MNEMONIC_KEY, KeyEvent.VK_B);
 		}
-		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			String[] message = {"JNotePad v 0.1", "Author: TaeHa"};
 			JOptionPane.showMessageDialog(JNotePad.this, message, "About JNotePad", JOptionPane.INFORMATION_MESSAGE);
@@ -421,9 +421,9 @@ public class JNotePad extends JFrame {
 	}
 	
 	private void start() {
-		setSize(450,270);
+		setSize    (500, 270);
 		setLocation(100, 100);
-		setVisible(true);
+		setVisible (true);
 	}
 	
 	public static void main(String[] args) {
