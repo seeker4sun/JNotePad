@@ -58,11 +58,17 @@ public class JNotePad extends JFrame {
 				_isSaved = false;
 			}
 		});
-		JScrollPane p = new JScrollPane(_textPane);
-		add(p);
+
 		_actionMap = createActionMap();
-		setJMenuBar(createMenuBar());
-		add(createToolBar(), BorderLayout.NORTH);
+		
+		JScrollPane scrollPaneOfTextPane = new JScrollPane(_textPane);
+		JMenuBar    menuBar = createMenuBar();
+        JToolBar    toolBar = createToolBar();
+        
+		setJMenuBar(menuBar);
+		add(scrollPaneOfTextPane);
+		add(toolBar, BorderLayout.NORTH);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
